@@ -48,12 +48,13 @@ namespace API
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }
