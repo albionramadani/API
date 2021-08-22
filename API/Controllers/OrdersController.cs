@@ -18,10 +18,20 @@ namespace API.Controllers
         {
             this.context = context;
         }
+        //GET /api/orders
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> Get()
         {
             return await context.Orders.OrderBy(x => x.Id).ToListAsync();
 
+        }
+        //POST /api/orders
+        [HttpPost]
+        public async Task<ActionResult<Order>> Create ([FromForm] Order order)
+        {
+            context.Orders.Add(order);
+            await context.SaveChangesAsync();
+            return CreatedAtAction(nameof(Create), order);
         }
     }
 }

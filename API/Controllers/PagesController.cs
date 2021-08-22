@@ -18,6 +18,8 @@ namespace API.Controllers
         {
             this.context = context;
         }
+        //GET /api/pages
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Page>>> Get()
         {
             return await context.Pages.OrderBy(x => x.Id).ToListAsync();
