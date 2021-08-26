@@ -122,5 +122,27 @@ namespace API.Controllers
 
             return NoContent();
         }
+        // DELETE /api/products/s
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<int>> Delete(int id)
+        {
+            var product = await context.Products.FindAsync(id);
+
+            if (!string.Equals(product.Image, "noimage.png"))
+            {
+                string uploadsDir = Path.Combine(webHostEnviroment.WebRootPath, "media/products");
+
+
+                string oldImagePath = Path.Combine(uploadsDir, product.Image);
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Exists(oldImagePath);
+                }
+            }
+            context.Products.Remove(product);
+            await context.SaveChangesAsync();
+            return NoContent();
+
+        }
     }
 }
