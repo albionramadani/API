@@ -25,5 +25,37 @@ namespace API.Controllers
             return await context.Pages.OrderBy(x => x.Id).ToListAsync();
 
         }
+        //POST /api/pages
+        [HttpPost]
+        public async Task<ActionResult<Page>> Create(Page page)
+        {
+            context.Pages.Add(page);
+            await context.SaveChangesAsync();
+            return CreatedAtAction(nameof(Create), page);
+        }
+        //PUT /api/pages
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Page>> Update(int id, Page page)
+        {
+            if (id != page.Id)
+            {
+                return BadRequest();
+            }
+
+            context.Entry(page).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return NoContent();
+
+        }
+        //PUT /api/pages
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Page>> Delete(int id) 
+        {
+            var page = await context.Pages.FindAsync(id);
+            context.Pages.Remove(page);
+            await context.SaveChangesAsync();
+            return NoContent();
+
+        }
     }
 }
