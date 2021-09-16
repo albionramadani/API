@@ -26,7 +26,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> Get(int p = 1)
         {
-            int pageSize = 4;
+            int pageSize = 6;
             var products = context.Products
                                     .OrderBy(x => x.Id)
                                     .Include(x => x.Category)
@@ -42,7 +42,7 @@ namespace API.Controllers
             Category category = await context.Categories.Where(x => x.Slug == slug).FirstOrDefaultAsync();
             if (category == null) return NotFound();
 
-            int pageSize = 4;
+            int pageSize = 6;
             var products = context.Products
                                     .OrderBy(x => x.Id)
                                     .Where(x => x.CategoryId == category.Id)

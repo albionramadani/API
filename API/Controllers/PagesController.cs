@@ -47,7 +47,7 @@ namespace API.Controllers
             return NoContent();
 
         }
-        //PUT /api/pages
+        //Delete /api/pages
         [HttpDelete("{id}")]
         public async Task<ActionResult<Page>> Delete(int id) 
         {

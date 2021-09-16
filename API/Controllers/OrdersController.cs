@@ -33,5 +33,15 @@ namespace API.Controllers
             await context.SaveChangesAsync();
             return CreatedAtAction(nameof(Create), order);
         }
+        //PUT /api/pages
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Page>> Delete(int id)
+        {
+            var order = await context.Orders.FindAsync(id);
+            context.Orders.Remove(order);
+            await context.SaveChangesAsync();
+            return NoContent();
+
+        }
     }
 }
